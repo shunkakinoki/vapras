@@ -1,3 +1,9 @@
+## [1.0.3](https://github.com/vapras/vapras/compare/v1.0.2...v1.0.3) (2020-04-08)
+
+### Bug Fixes
+
+- 🐛 add chatops fn ([#9](https://github.com/vapras/vapras/issues/9)) ([e49e412](https://github.com/vapras/vapras/commit/e49e4127bccca5b6843597ede0f10bcf3fdb1703))
+
 ## [1.0.2](https://github.com/vapras/vapras/compare/v1.0.1...v1.0.2) (2020-04-08)
 
 ### Bug Fixes
