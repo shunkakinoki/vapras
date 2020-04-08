@@ -7,7 +7,7 @@ resource "github_repository" "vapras" {
   has_projects = true
   has_wiki     = false
 
-  topics = ["flutter", "flutter-app", "flutter-ui"]
+  # topics = ["flutter", "flutter-app", "flutter-ui"]
 }
 
 resource "github_branch_protection" "alpha" {
