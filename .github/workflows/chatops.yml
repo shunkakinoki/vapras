@@ -1,0 +1,15 @@
+name: Chatops
+on: [issue_comment]
+jobs:
+  chatops:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Slash command dispatch
+        uses: peter-evans/slash-command-dispatch@v1
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          reaction-token: ${{ secrets.GITHUB_TOKEN }}
+          reactions: true
+          config-from-file: .github/chatops.json
+          commands: ready, test
