@@ -1,0 +1,54 @@
+name: Release
+on:
+  push:
+    branches:
+      - alpha
+      - beta
+      - master
+env:
+  flutter_channel: "stable"
+  flutter_version: "1.12.13+hotfix.8"
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: Cache node modules
+        id: yarn
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: node-v1-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            node-v1-
+      - name: Install dependencies with yarn
+        if: steps.yarn.outputs.cache-hit != 'true'
+        run: |
+          yarn install
+      - name: Extract branch name
+        id: branch
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      - name: Release
+        run: |
+          yarn run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Restore yarn.lock
+        run: |
+          git restore yarn.lock
+      - name: Run yarn fix
+        run: |
+          yarn run fix
+      - name: Create a pull request if updated
+        uses: peter-evans/create-pull-request@v2
+        with:
+          branch-suffix: short-commit-hash
+          token: ${{ secrets.ACCESS_TOKEN }}
+          title: "chore: [vapras-auto-pr]"
+        env:
+          HUSKY_SKIP_HOOKS: 1
