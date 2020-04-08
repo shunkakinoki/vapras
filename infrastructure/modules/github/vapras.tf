@@ -6,8 +6,6 @@ resource "github_repository" "vapras" {
   has_issues   = true
   has_projects = true
   has_wiki     = false
-
-  # topics = ["flutter", "flutter-app", "flutter-ui"]
 }
 
 resource "github_branch_protection" "alpha" {
@@ -22,7 +20,7 @@ resource "github_branch_protection" "alpha" {
 
   required_status_checks {
     strict   = true
-    contexts = ["auto-approve", "context", "flutter", "ready", "terraform", "yarn", "Semantic Pull Request", "WIP"]
+    contexts = ["auto-approve", "context", "ready", "terraform", "yarn", "Semantic Pull Request", "WIP"]
   }
 }
 
@@ -38,7 +36,7 @@ resource "github_branch_protection" "beta" {
 
   required_status_checks {
     strict   = true
-    contexts = ["auto-approve", "context", "flutter", "ready", "terraform", "yarn", "Semantic Pull Request", "WIP"]
+    contexts = ["auto-approve", "context", "ready", "terraform", "yarn", "Semantic Pull Request", "WIP"]
   }
 }
 
@@ -55,6 +53,6 @@ resource "github_branch_protection" "master" {
 
   required_status_checks {
     strict   = true
-    contexts = ["auto-approve", "context", "flutter", "ready", "terraform (master)", "yarn", "atlas/vapras/vapras-master", "Semantic Pull Request", "WIP"]
+    contexts = ["auto-approve", "context", "ready", "terraform (master)", "yarn", "atlas/vapras/vapras-master", "Semantic Pull Request", "WIP"]
   }
 }
